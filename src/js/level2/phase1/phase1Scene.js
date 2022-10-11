@@ -54,23 +54,25 @@ var crystalModelPath = new URL('../../../assets/models/crystal.obj',import.meta.
 var crystalTexturePath = new URL('../../../assets/textures/crystal.jpg',import.meta.url).toString()
 loadOBJFile(objective,crystalModelPath,'crystal',crystalTexturePath,2.0)
 objective.rotateX(degreeToRadians(-90))
-objective.position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0.0,gridMapHelper.getGlobalZPositionFromCoord(0))
+objective.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(3))
 
-const boxGeometry1 = new THREE.BoxGeometry(14,2,2)
+const boxGeometry1 = new THREE.BoxGeometry(16,2,2)
 const boxGeometry2 = new THREE.BoxGeometry(16,2,2)
-const boxGeometry3 = new THREE.BoxGeometry(2,2,4)
 const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"})
+
+const boxGeometry3 = new THREE.BoxGeometry(2,2,2)
+const boxMaterial1 = new THREE.MeshLambertMaterial({color: "blue"})
 
 const box1 = new THREE.Mesh(boxGeometry1,boxMaterial)
 const box2 = new THREE.Mesh(boxGeometry2,boxMaterial)
-const box3 = new THREE.Mesh(boxGeometry3,boxMaterial)
-box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
+const box3 = new THREE.Mesh(boxGeometry3,boxMaterial1)
+box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
 box2.position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
-box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1.0,gridMapHelper.getGlobalZPositionFromCoord(0.5))
+box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0.0,gridMapHelper.getGlobalZPositionFromCoord(3))
 
-gridMapHelper.addObstacle(2,8,2,2)
+gridMapHelper.addObstacle(2,9,2,2)
 gridMapHelper.addObstacle(2,9,4,4)
-gridMapHelper.addObstacle(7,7,0,1)
+gridMapHelper.addObstacle(7,7,3,3)
 
 scene.add(ambientLight)
 scene.add(mainLight)
