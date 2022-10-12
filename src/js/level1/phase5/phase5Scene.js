@@ -46,7 +46,7 @@ const plane = gridMapHelper.createGridPlane()
 var actorModelPath = new URL('../../../assets/models/eve.glb',import.meta.url).toString()
 const actor = new THREE.Object3D()
 loadGLBFile(actor,actorModelPath,"eve",2.0)
-actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
+actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(5))
 actor.rotateY(degreeToRadians(90))
 
 const objective1 = new THREE.Object3D()

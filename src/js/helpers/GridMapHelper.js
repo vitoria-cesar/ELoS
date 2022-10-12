@@ -286,9 +286,9 @@ export class GridMapHelper {
     }
 
     /**
-     * Defines a coordinate that causes a game over (or any event you want) if the actor steps on.
-     * @param {number} x - X Coordinate 
-     * @param {number} z - Z Coordinate
+     * Define uma coordenada que causa um game over (ou qualquer evento desejado) se o ator entrar.
+     * @param {number} x - X Coordenada
+     * @param {number} z - Z Coordenada
      */
     addTrap(x,z)
     {

@@ -16,7 +16,7 @@ import
     getTotalTime,
     displayTime,
     //checkPhaseContinuity,
-    setTimeForNextPhase
+    setTimeForNextPhase 
 } from '../../helpers/Util'
 import {editor,readOnlyState} from '../../components/global/editor'
 import { parseCode } from '../../level1/level1Parser'
@@ -49,37 +49,62 @@ loadGLBFile(actor,actorModelPath,"eve",2.0)
 actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(5))
 actor.rotateY(degreeToRadians(90))
 
-const objective = new THREE.Object3D()
+const objective1 = new THREE.Object3D()
 var crystalModelPath = new URL('../../../assets/models/crystal.obj',import.meta.url).toString()
 var crystalTexturePath = new URL('../../../assets/textures/crystal.jpg',import.meta.url).toString()
-loadOBJFile(objective,crystalModelPath,'crystal',crystalTexturePath,2.0)
-objective.rotateX(degreeToRadians(-90))
-objective.position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0.0,gridMapHelper.getGlobalZPositionFromCoord(0))
+loadOBJFile(objective1,crystalModelPath,'crystal',crystalTexturePath,2.0)
+objective1.rotateX(degreeToRadians(-90))
+const objective2 = new THREE.Object3D()
+loadOBJFile(objective2,crystalModelPath,'crystal',crystalTexturePath,2.0)
+objective2.rotateX(degreeToRadians(-90))
+objective1.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(9))
+objective2.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(0))
 
-const boxGeometry1 = new THREE.BoxGeometry(14,2,2)
-const boxGeometry2 = new THREE.BoxGeometry(16,2,2)
-const boxGeometry3 = new THREE.BoxGeometry(2,2,4)
+const boxGeometry = new THREE.BoxGeometry(16,2,2)
+const boxGeometry1 = new THREE.BoxGeometry(8,2,2)
+const boxGeometry2 = new THREE.BoxGeometry(6,2,2)
 const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"})
 
-const box1 = new THREE.Mesh(boxGeometry1,boxMaterial)
-const box2 = new THREE.Mesh(boxGeometry2,boxMaterial)
-const box3 = new THREE.Mesh(boxGeometry3,boxMaterial)
-box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
-box2.position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
-box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1.0,gridMapHelper.getGlobalZPositionFromCoord(0.5))
+const boxGeometry3= new THREE.BoxGeometry(2,1,2)
+const boxMaterial1 = new THREE.MeshLambertMaterial({color: "blue"})
 
-gridMapHelper.addObstacle(2,8,2,2)
+const box1 = new THREE.Mesh(boxGeometry,boxMaterial)
+const box2 = new THREE.Mesh(boxGeometry,boxMaterial)
+const box3 = new THREE.Mesh(boxGeometry1,boxMaterial)
+const box4 = new THREE.Mesh(boxGeometry2,boxMaterial)
+
+box3.rotateY(degreeToRadians(90))
+box4.rotateY(degreeToRadians(90))
+
+const fireHole = new THREE.Mesh(boxGeometry3,boxMaterial1)
+const fireHole1 = new THREE.Mesh(boxGeometry3,boxMaterial1)
+
+box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(4.5),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
+box2.position.set(gridMapHelper.getGlobalXPositionFromCoord(4.5),1.0,gridMapHelper.getGlobalZPositionFromCoord(6))
+box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1.0,gridMapHelper.getGlobalZPositionFromCoord(1.5))
+box4.position.set(gridMapHelper.getGlobalXPositionFromCoord(8),1.0,gridMapHelper.getGlobalZPositionFromCoord(8))
+
+fireHole.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.5,gridMapHelper.getGlobalZPositionFromCoord(4))
+fireHole1.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.5,gridMapHelper.getGlobalZPositionFromCoord(6))
+
+gridMapHelper.addObstacle(2,9,2,2)
 gridMapHelper.addObstacle(2,9,4,4)
-gridMapHelper.addObstacle(7,7,0,1)
+gridMapHelper.addObstacle(8,8,0,3)
+gridMapHelper.addObstacle(8,8,7,9)
+
 
 scene.add(ambientLight)
 scene.add(mainLight)
 scene.add(plane)
-scene.add(objective)
+scene.add(objective1)
+scene.add(objective2)
 scene.add(actor)
 scene.add(box1)
 scene.add(box2)
 scene.add(box3)
+scene.add(box4)
+scene.add(fireHole)
+scene.add(fireHole1)
 
 function animate() {
     requestAnimationFrame(animate)
@@ -128,28 +153,39 @@ function coletarCristal()
         return
     }
 
-    if(checkCollision(actor,objective))
+    if(checkCollision(actor,objective1))
     {
-        objective.visible = false
-        printOnConsole("Cristal coletado com sucesso.")
+        objective1.visible = false
+        printOnConsole("Cristal coletado.")
+    }
+    else if(checkCollision(actor,objective2))
+    {
+        objective2.visible = false
+        printOnConsole("Cristal coletado.")
     }
     else
     {
         printOnConsole("Robô não está sobre o cristal.")
     }
+
+    if(!objective1.visible && !objective2.visible)
+    {
+        printOnConsole("Todos os cristais coletados com sucesso!")
+    }
 }
 
 function resetLevel()
 {
-    actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(5))
+    actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
     actor.getObjectByName('eve').rotation.set(0,0,0)
     actor.rotation.set(0,degreeToRadians(90),0)
-    objective.visible = true
+    objective1.visible = true
+    objective2.visible = true
 }
 
 function winCondition()
 {
-    if(checkCollision(actor,objective) && !objective.visible)
+    if(!objective1.visible && !objective2.visible)
     {
         return true
     }
@@ -198,11 +234,11 @@ clsConsoleBtn.addEventListener("click",function(){
 const advanceBtn = document.getElementById('advanceBtn')
 advanceBtn.addEventListener('click',function(e){
     e.preventDefault()
-    setTimeForNextPhase('/level1/phase7/',getTotalTime(sceneProperties.phaseTimer.getElapsedTime()))
+    setTimeForNextPhase('/level1/phase4/',getTotalTime(sceneProperties.phaseTimer.getElapsedTime()))
     window.location.href = advanceBtn.href
 })
 
-//checkPhaseContinuity('/level1/phase6/')
+//checkPhaseContinuity('/level1/phase3/')
 resizeCanvasToDisplaySize(renderer,camera)
 sceneProperties.phaseTimer.start()
 animate()
