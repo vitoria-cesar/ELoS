@@ -65,7 +65,7 @@ const boxGeometry1 = new THREE.BoxGeometry(2,2,2)
 const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"})
 
 const boxGeometry2= new THREE.BoxGeometry(2,1,2)
-const boxMaterial1 = new THREE.MeshLambertMaterial({color: "blue"})
+const boxMaterial1 = new THREE.MeshLambertMaterial({color: "white"})
 
 const box1 = new THREE.Mesh(boxGeometry,boxMaterial)
 const box2 = new THREE.Mesh(boxGeometry,boxMaterial)
@@ -92,7 +92,6 @@ gridMapHelper.addObstacle(2,9,2,2)
 gridMapHelper.addObstacle(2,9,4,4)
 gridMapHelper.addObstacle(7,7,0,2)
 gridMapHelper.addObstacle(7,9,8,8)
-//gridMapHelper.addObstacle(7,7,0,2)
 
 
 scene.add(ambientLight)

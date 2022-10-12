@@ -66,7 +66,7 @@ const boxGeometry2 = new THREE.BoxGeometry(6,2,2)
 const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"})
 
 const boxGeometry3= new THREE.BoxGeometry(2,1,2)
-const boxMaterial1 = new THREE.MeshLambertMaterial({color: "blue"})
+const boxMaterial1 = new THREE.MeshLambertMaterial({color: "white"})
 
 const box1 = new THREE.Mesh(boxGeometry,boxMaterial)
 const box2 = new THREE.Mesh(boxGeometry,boxMaterial)

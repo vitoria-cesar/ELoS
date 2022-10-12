@@ -54,23 +54,53 @@ var crystalModelPath = new URL('../../../assets/models/crystal.obj',import.meta.
 var crystalTexturePath = new URL('../../../assets/textures/crystal.jpg',import.meta.url).toString()
 loadOBJFile(objective,crystalModelPath,'crystal',crystalTexturePath,2.0)
 objective.rotateX(degreeToRadians(-90))
-objective.position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0.0,gridMapHelper.getGlobalZPositionFromCoord(0))
+objective.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.0,gridMapHelper.getGlobalZPositionFromCoord(5))
 
 const boxGeometry1 = new THREE.BoxGeometry(14,2,2)
-const boxGeometry2 = new THREE.BoxGeometry(16,2,2)
-const boxGeometry3 = new THREE.BoxGeometry(2,2,4)
-const boxMaterial = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"})
+const boxMaterial1 = new THREE.MeshLambertMaterial({color: "rgb(0,255,0)"})
 
-const box1 = new THREE.Mesh(boxGeometry1,boxMaterial)
-const box2 = new THREE.Mesh(boxGeometry2,boxMaterial)
-const box3 = new THREE.Mesh(boxGeometry3,boxMaterial)
-box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
-box2.position.set(gridMapHelper.getGlobalXPositionFromCoord(5.5),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
-box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1.0,gridMapHelper.getGlobalZPositionFromCoord(0.5))
+const boxGeometry2= new THREE.BoxGeometry(2,1,2)
+const boxMaterial2 = new THREE.MeshLambertMaterial({color: "white"})
 
-gridMapHelper.addObstacle(2,8,2,2)
-gridMapHelper.addObstacle(2,9,4,4)
-gridMapHelper.addObstacle(7,7,0,1)
+const box1 = new THREE.Mesh(boxGeometry1,boxMaterial1)
+const box2 = new THREE.Mesh(boxGeometry1,boxMaterial1)
+const box3 = new THREE.Mesh(boxGeometry1,boxMaterial1)
+const box4 = new THREE.Mesh(boxGeometry1,boxMaterial1)
+
+const fireHole1 = new THREE.Mesh(boxGeometry2,boxMaterial2)
+const fireHole2 = new THREE.Mesh(boxGeometry2,boxMaterial2)
+const fireHole3 = new THREE.Mesh(boxGeometry2,boxMaterial2)
+const fireHole4 = new THREE.Mesh(boxGeometry2,boxMaterial2)
+
+box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
+box2.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(8))
+box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
+box4.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(6))
+
+fireHole1.position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0.5,gridMapHelper.getGlobalZPositionFromCoord(7))
+fireHole2.position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.5,gridMapHelper.getGlobalZPositionFromCoord(7))
+fireHole3.position.set(gridMapHelper.getGlobalXPositionFromCoord(3),0.5,gridMapHelper.getGlobalZPositionFromCoord(3))
+fireHole4.position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.5,gridMapHelper.getGlobalZPositionFromCoord(3))
+
+gridMapHelper.addObstacle(2,8,4,4)
+gridMapHelper.addObstacle(2,8,6,6)
+gridMapHelper.addObstacle(8,8,0,3)
+gridMapHelper.addObstacle(2,9,8,8)
+
+const trapGeometry = new THREE.BoxGeometry(2,1,2)
+const trapMaterial = new THREE.MeshLambertMaterial({color: "rgb(255,0,0)"})
+
+const trap1 = new THREE.Mesh(trapGeometry,trapMaterial)
+trap1.position.set(gridMapHelper.getGlobalXPositionFromCoord(8),0.5,gridMapHelper.getGlobalZPositionFromCoord(5))
+gridMapHelper.addTrap(8,5)
+
+const trap2 = new THREE.Mesh(trapGeometry,trapMaterial)
+trap2.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.5,gridMapHelper.getGlobalZPositionFromCoord(2))
+gridMapHelper.addTrap(8,5)
+
+const trap3 = new THREE.Mesh(trapGeometry,trapMaterial)
+trap3.position.set(gridMapHelper.getGlobalXPositionFromCoord(9),0.5,gridMapHelper.getGlobalZPositionFromCoord(8))
+gridMapHelper.addTrap(8,5)
 
 scene.add(ambientLight)
 scene.add(mainLight)
@@ -80,6 +110,14 @@ scene.add(actor)
 scene.add(box1)
 scene.add(box2)
 scene.add(box3)
+scene.add(box4)
+scene.add(trap1)
+scene.add(trap2)
+scene.add(trap3)
+scene.add(fireHole1)
+scene.add(fireHole2)
+scene.add(fireHole3)
+scene.add(fireHole4)
 
 function animate() {
     requestAnimationFrame(animate)
@@ -198,11 +236,11 @@ clsConsoleBtn.addEventListener("click",function(){
 const advanceBtn = document.getElementById('advanceBtn')
 advanceBtn.addEventListener('click',function(e){
     e.preventDefault()
-    setTimeForNextPhase('/level1/phase7/',getTotalTime(sceneProperties.phaseTimer.getElapsedTime()))
+    setTimeForNextPhase('/level1/phase8/',getTotalTime(sceneProperties.phaseTimer.getElapsedTime()))
     window.location.href = advanceBtn.href
 })
 
-//checkPhaseContinuity('/level1/phase6/')
+//checkPhaseContinuity('/level1/phase7/')
 resizeCanvasToDisplaySize(renderer,camera)
 sceneProperties.phaseTimer.start()
 animate()
