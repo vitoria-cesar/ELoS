@@ -12,7 +12,7 @@ export class GridMapHelper {
      * @param {string} [divisionsColor="rgb(0,0,0)"] - Cor das linhas de divisão no plano. O padrão é "rgb(0,0,0)".
      * @param {string} [planeColor="rgb(200,200,200)"] -  Cor do plano. O padrão é "rgb(200.200.200)"
      */
-    constructor(divisions = 10, divisionsColor = "rgb(0,0,0)", planeColor = "rgb(200,200,200)")
+    constructor(divisions = 10, divisionsColor = "black", planeColor = "grey")
     {
         this.divisions = divisions
         this.divisionsColor = divisionsColor

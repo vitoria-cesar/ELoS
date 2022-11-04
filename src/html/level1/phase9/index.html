@@ -12,12 +12,12 @@
             <div class="row">
                 <div class="col-6 vh-100">
                     <div class="position-absolute">
-                        <h2 class="bg-warning">Nível 1 - Fase 9 - teste</h2>
+                        <h2 class="bg-warning">Nível 1 - Fase 9 de 9</h2>
                         <p class="bg-info">
-                            Faça o robô chegar ao cristal, após isso, o recolha.
+                            Faça o robô chegar aos cristais, após isso, os recolha.
                         </p>
                         <h2 id="winMessage" class="bg-success invisible">Fase Concluída</h2>
-                        <a id="advanceBtn" class="btn btn-primary invisible" href="../phase8/index.html">Avançar</a>
+                        <a id="advanceBtn" class="btn btn-primary invisible" href="../../index.html">Avançar</a>
                     </div>
                     <div class="position-absolute bottom-0">
                         <h3 id="timer" class="text-white">Tempo:</h3>
@@ -42,6 +42,32 @@
                             <script id="console">
                                 importComponent('../../components/global/console.html','console')
                             </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="logModal" tabindex="-1" aria-labelledby="logModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logModalLabel">Para avançar para o Nível 2, informe:</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="dataLog">
+                                <div class="mb-2">
+                                    <label for="name" class="form-label"><b>Nome:</b></label>
+                                    <input type="text" name="name" id="name" class="form-control">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="age" class="form-label"><b>Idade:</b></label>
+                                    <input type="number" name="age" id="age" class="form-control" min="1" step="1">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button id="subBtn" type="button" class="btn btn-primary">Avançar</button>
                         </div>
                     </div>
                 </div>
