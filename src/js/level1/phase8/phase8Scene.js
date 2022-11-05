@@ -27,7 +27,6 @@ const camera = new THREE.PerspectiveCamera(45, 2, 1, 1000)
 camera.position.set(0,15,30)
 
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById("sceneView")})
-//TESTE SOMBRA
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type  = THREE.VSMShadowMap; 
 
@@ -37,50 +36,43 @@ window.addEventListener( 'resize', function(){
 
 const ambientLight = new THREE.HemisphereLight('white','darkslategreywhi',0.5)
 
-//const mainLight = new THREE.DirectionalLight('white',1)
-//mainLight.position.set(2,1,1) 
-
-//COMEÇA TESTE DE LUZ
 const lightColor = "white"
 const dirLight = new THREE.DirectionalLight(lightColor, 0.8)
 
-//const position = new THREE.Vector3(0, 20, 35)
-dirLight.position.set(5,15,30)
+dirLight.position.set(0,20,15)
 
 dirLight.castShadow = true
 
-dirLight.shadow.mapSize.width = 100
-dirLight.shadow.mapSize.height = 100
+dirLight.shadow.mapSize.width = 200
+dirLight.shadow.mapSize.height = 200
 dirLight.shadow.camera.near = 10
-dirLight.shadow.camera.far = 30
-dirLight.shadow.camera.left = -30
-dirLight.shadow.camera.right = 30
-dirLight.shadow.camera.bottom = -30
-dirLight.shadow.camera.top = 3
+dirLight.shadow.camera.far = 35
+dirLight.shadow.camera.left = -12
+dirLight.shadow.camera.right = 12
+dirLight.shadow.camera.bottom = -12
+dirLight.shadow.camera.top = 12
+dirLight.shadow.radius = 2
 
 scene.add(dirLight)
 
-const helper = new THREE.CameraHelper(dirLight.shadow.camera)
-
-scene.add(helper)
-
-//TERMINA TESTE
+//const helper = new THREE.CameraHelper(dirLight.shadow.camera)
+//scene.add(helper)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 
 const gridMapHelper = new GridMapHelper()
 
 const plane = gridMapHelper.createGridPlane()
-plane.receiveShadow = true //TESTE
-plane.castShadow = false //TESTE
+plane.receiveShadow = true 
+plane.castShadow = false 
 
 var actorModelPath = new URL('../../../assets/models/eve.glb',import.meta.url).toString()
 const actor = new THREE.Object3D()
 loadGLBFile(actor,actorModelPath,"eve",2.0)
 actor.position.set(gridMapHelper.getGlobalXPositionFromCoord(0),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
 actor.rotateY(degreeToRadians(90))
-actor.castShadow = true //TESTE
-actor.receiveShadow = false //TESTE
+actor.castShadow = true 
+actor.receiveShadow = false 
 
 var crystalModelPath = new URL('../../../assets/models/crystal.obj',import.meta.url).toString()
 var crystalTexturePath = new URL('../../../assets/textures/cristal.png',import.meta.url).toString()
@@ -88,17 +80,17 @@ var crystalTexturePath = new URL('../../../assets/textures/cristal.png',import.m
 const objective1 = new THREE.Object3D()
 loadOBJFile(objective1,crystalModelPath,'crystal',crystalTexturePath,2.0)
 objective1.rotateX(degreeToRadians(-90))
-objective1.castShadow = true //TESTE
+objective1.castShadow = true 
 
 const objective2 = new THREE.Object3D()
 loadOBJFile(objective2,crystalModelPath,'crystal',crystalTexturePath,2.0)
 objective2.rotateX(degreeToRadians(-90))
-objective2.castShadow = true //TESTE
+objective2.castShadow = true 
 
 const objective3 = new THREE.Object3D()
 loadOBJFile(objective3,crystalModelPath,'crystal',crystalTexturePath,2.0)
 objective3.rotateX(degreeToRadians(-90))
-objective3.castShadow = true //TESTE
+objective3.castShadow = true 
 
 objective1.position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.0,gridMapHelper.getGlobalZPositionFromCoord(2))
 objective2.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),0.0,gridMapHelper.getGlobalZPositionFromCoord(8))
@@ -109,16 +101,16 @@ var trapTexturePath = new URL('../../../assets/textures/trap1.png',import.meta.u
 
 const trap1 = new THREE.Object3D()
 loadOBJFile(trap1,trapModelPath,'trap', trapTexturePath, 1.5)
-trap1.castShadow = true //TESTE
+trap1.castShadow = true 
 
 const trap2 = new THREE.Object3D()
 loadOBJFile(trap2,trapModelPath,'trap', trapTexturePath, 1.5)
-trap2.castShadow = true //TESTE
+trap2.castShadow = true
 
 const trap3 = new THREE.Object3D()
 loadOBJFile(trap3,trapModelPath,'trap', trapTexturePath, 1.5)
 trap3.rotateY(degreeToRadians(90))
-trap3.castShadow = true //TESTE
+trap3.castShadow = true 
 
 trap1.position.set(gridMapHelper.getGlobalXPositionFromCoord(6),0.4,gridMapHelper.getGlobalZPositionFromCoord(8))
 trap2.position.set(gridMapHelper.getGlobalXPositionFromCoord(1),0.4,gridMapHelper.getGlobalZPositionFromCoord(5))
@@ -130,40 +122,39 @@ var textureParede = new THREE.TextureLoader().load(aux)
 const boxMaterial = new THREE.MeshBasicMaterial({map: textureParede})
 
 const box1 = new THREE.Mesh(boxGeometry,boxMaterial)
-box1.castShadow = true //TESTE
+box1.castShadow = true 
 const box2 = new THREE.Mesh(boxGeometry,boxMaterial)
-box2.castShadow = true //TESTE
+box2.castShadow = true 
 const box3 = new THREE.Mesh(boxGeometry,boxMaterial)
-box3.castShadow = true //TESTE
+box3.castShadow = true 
 box1.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalXPositionFromCoord(7))
 box2.position.set(gridMapHelper.getGlobalXPositionFromCoord(6),1.0,gridMapHelper.getGlobalZPositionFromCoord(7))
 box3.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1.0,gridMapHelper.getGlobalZPositionFromCoord(7))
 
 const box4 = new THREE.Mesh(boxGeometry,boxMaterial)
-box4.castShadow = true //TESTE
+box4.castShadow = true 
 const box5 = new THREE.Mesh(boxGeometry,boxMaterial)
-box5.castShadow = true //TESTE
+box5.castShadow = true 
 const box6 = new THREE.Mesh(boxGeometry,boxMaterial)
-box6.castShadow = true //TESTE
+box6.castShadow = true 
 box4.position.set(gridMapHelper.getGlobalXPositionFromCoord(1),1.0,gridMapHelper.getGlobalXPositionFromCoord(4))
 box5.position.set(gridMapHelper.getGlobalXPositionFromCoord(2),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
 box6.position.set(gridMapHelper.getGlobalXPositionFromCoord(3),1.0,gridMapHelper.getGlobalZPositionFromCoord(4))
 
 const box7 = new THREE.Mesh(boxGeometry,boxMaterial)
 box7.rotateX(degreeToRadians(-90))
-box7.castShadow = true //TESTE
+box7.castShadow = true 
 const box8 = new THREE.Mesh(boxGeometry,boxMaterial)
 box8.rotateX(degreeToRadians(-90))
-box8.castShadow = true //TESTE
+box8.castShadow = true 
 const box9 = new THREE.Mesh(boxGeometry,boxMaterial)
 box9.rotateX(degreeToRadians(-90))
-box9.castShadow = true //TESTE
+box9.castShadow = true 
 box7.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalXPositionFromCoord(1))
 box8.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
 box9.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(3))
 
 scene.add(ambientLight)
-//scene.add(mainLight)
 scene.add(plane)
 scene.add(objective1)
 scene.add(objective2)
