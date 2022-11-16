@@ -34,7 +34,7 @@ camera.position.set(0,15,30)
 
 const renderer = new THREE.WebGLRenderer({canvas: document.getElementById("sceneView")})
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.shadowMap.type = THREE.PCFShadowMap;
 
 window.addEventListener( 'resize', function(){
     resizeCanvasToDisplaySize(renderer,camera);
@@ -49,6 +49,8 @@ const light = new THREE.DirectionalLight( 0xffffff, 0.5 )
 light.position.set( 0, 30, 35)
 light.castShadow = true
 
+const helper = new THREE.CameraHelper(light.shadow.camera)
+scene.add(helper)
 
 //TESTE DE LUZ
 
