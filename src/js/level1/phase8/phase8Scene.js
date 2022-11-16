@@ -21,7 +21,7 @@ import
 import {editor,readOnlyState} from '../../components/global/editor'
 import { parseCode } from '../level1Parser'
 
-import Fire from '../src/js/helpers/fire.js'
+import Fire from "../../../../src/js/helpers/fire.js"
 
 const scene = new THREE.Scene()
 
@@ -161,11 +161,12 @@ var clock = new THREE.Clock()
 
 let loader = new THREE.TextureLoader()
 
-let fireTex = loader.load("../assets/textures/fire.png")
+let aux1 = new URL("../../../assets/textures/fire.png",import.meta.url).toString()
+let fireTex = loader.load(aux1)
 let fire = new Fire(fireTex)
 
 fire.scale.set(1.0, 3.0, 1.0)
-fire.position.set(0.0, 2.5, 0.0)
+fire.position.set(5.0, 1.5, 1.0)
 
 
 scene.add(ambientLight)
@@ -186,10 +187,12 @@ scene.add(box6)
 scene.add(box7)
 scene.add(box8)
 scene.add(box9)
+scene.add(fire)
 
 function animate() {
     requestAnimationFrame(animate)
     controls.update()
+    fire.update(clock)
     renderer.render(scene, camera)
     let time = getTotalTime(sceneProperties.phaseTimer.getElapsedTime())
     displayTime(time)
