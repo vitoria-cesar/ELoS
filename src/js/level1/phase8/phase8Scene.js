@@ -21,6 +21,8 @@ import
 import {editor,readOnlyState} from '../../components/global/editor'
 import { parseCode } from '../level1Parser'
 
+import Fire from '../src/js/helpers/fire.js'
+
 const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(45, 2, 1, 1000)
@@ -153,6 +155,18 @@ box9.castShadow = true
 box7.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalXPositionFromCoord(1))
 box8.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
 box9.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(3))
+
+//TESTANDO IMPLIMENTAÇÃO DO FOGO 
+var clock = new THREE.Clock()
+
+let loader = new THREE.TextureLoader()
+
+let fireTex = loader.load("../assets/textures/fire.png")
+let fire = new Fire(fireTex)
+
+fire.scale.set(1.0, 3.0, 1.0)
+fire.position.set(0.0, 2.5, 0.0)
+
 
 scene.add(ambientLight)
 scene.add(plane)
