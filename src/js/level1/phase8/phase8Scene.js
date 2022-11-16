@@ -156,18 +156,19 @@ box7.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper
 box8.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(2))
 box9.position.set(gridMapHelper.getGlobalXPositionFromCoord(5),1.0,gridMapHelper.getGlobalZPositionFromCoord(3))
 
-//TESTANDO IMPLIMENTAÇÃO DO FOGO 
 var clock = new THREE.Clock()
 
 let loader = new THREE.TextureLoader()
-
 let aux1 = new URL("../../../assets/textures/fire.png",import.meta.url).toString()
 let fireTex = loader.load(aux1)
-let fire = new Fire(fireTex)
 
-fire.scale.set(1.0, 3.0, 1.0)
-fire.position.set(5.0, 1.5, 1.0)
+let fire1 = new Fire(fireTex)
+fire1.scale.set(1.2, 3.0, 1.2)
+fire1.position.set(gridMapHelper.getGlobalXPositionFromCoord(4),1.5,gridMapHelper.getGlobalZPositionFromCoord(5))
 
+let fire2 = new Fire(fireTex)
+fire2.scale.set(1.2, 3.0, 1.2)
+fire2.position.set(gridMapHelper.getGlobalXPositionFromCoord(7),1.5,gridMapHelper.getGlobalZPositionFromCoord(0))
 
 scene.add(ambientLight)
 scene.add(plane)
@@ -187,12 +188,14 @@ scene.add(box6)
 scene.add(box7)
 scene.add(box8)
 scene.add(box9)
-scene.add(fire)
+scene.add(fire1)
+scene.add(fire2)
 
 function animate() {
     requestAnimationFrame(animate)
     controls.update()
-    fire.update(clock)
+    fire1.update(clock)
+    fire2.update(clock)
     renderer.render(scene, camera)
     let time = getTotalTime(sceneProperties.phaseTimer.getElapsedTime())
     displayTime(time)
